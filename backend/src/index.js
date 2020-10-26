@@ -10,7 +10,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/project', (req, res)=>{
-    res.json(projects)
+    const { title } = req.query;
+    const result = title 
+        ? projects.filter(project => project.title.includes(title)) 
+        : projects;
+
+    res.json(result)
 }) 
 
 app.post('/project', (req, res)=>{
