@@ -1,15 +1,35 @@
 const express = require('express')
-const { uuid } = require('uuidv4')
+const { uuid, isUuid } = require('uuidv4')
 const app = express()
 app.use(express.json())
 
 const projects = []
 
+function logRequests (req, res, next){
+    const { method, url }	= req
+    const logLabel = `o metodo é ${method} e a url é ${url}`
+
+    console.log(logLabel)
+    next()
+}
+
+function validateId(req, res, next){
+    const { id } = req.params
+
+    if(!isUuid(id)){
+        return res.status(400).json({error: 'invalid id'})
+    }
+
+    next()
+}
+
+app.use(logRequests);
+
 app.get('/', (req, res) => {
     res.json({msg: 'hello world'})
 })
 
-app.get('/project', (req, res)=>{
+app.get('/project', validateId  ,(req, res)=>{
     const { title } = req.query;
     const result = title 
         ? projects.filter(project => project.title.includes(title)) 
@@ -26,7 +46,7 @@ app.post('/project', (req, res)=>{
     res.json(project)
 })
 
-app.put('/project/:id', (req, res)=>{
+app.put('/project/:id', validateId, (req, res)=>{
     const { id } = req.params;
     const { title, owner } = req.body
 
