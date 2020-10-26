@@ -1,38 +1,60 @@
 const express = require('express')
-
+const { uuid } = require('uuidv4')
 const app = express()
+app.use(express.json())
+
+const projects = []
 
 app.get('/', (req, res) => {
     res.json({msg: 'hello world'})
 })
 
 app.get('/project', (req, res)=>{
-    res.json([
-        'projeto1',
-        'projeto2'
-    ])
-})
+    res.json(projects)
+}) 
 
 app.post('/project', (req, res)=>{
-    res.json([
-        'projeto1',
-        'projeto2',
-        'projeto3',
-    ])
+    const { title, owner } = req.body
+    const project = { id: uuid() , title, owner }
+
+    projects.push(project)
+    res.json(project)
 })
 
 app.put('/project/:id', (req, res)=>{
-    res.json({
-        info: "update"
-    })
+    const { id } = req.params;
+    const { title, owner } = req.body
+
+    const projectIndex = projects.findIndex(project => project.id === id )
+
+    if(projectIndex < 0){
+        res.status(404).json({error: 'project not found'})
+    }
+
+    const project = {
+        id,
+        title,
+        owner
+    }
+    projects[projectIndex] = project
+
+    res.json(project)
 })
 
 app.delete('/project/:id', (req, res)=>{
-    res.json({
-        info: "delete"
-    })
+    const { id } = req.params;
+    const projectIndex = projects.findIndex(project => project.id === id );
+
+    if(projectIndex < 0){
+        req.status.json({error: 'project not found'});
+    }
+
+    projects.splice(projectIndex, 1);
+    
+    res.status(204).send()
 })
 
 app.listen(3333, ()=>{
     console.log('✨ backend executando ✨')
 })
+
