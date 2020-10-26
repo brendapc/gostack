@@ -2,8 +2,10 @@ const express = require('express')
 
 const app = express()
 
-app.get('/', (req, res)=>{
-    res.json({msg: 'ola'})
+app.get('/', (req, res) => {
+    res.json({msg: 'hello world'})
 })
 
-app.listen(3333)
+app.listen(3333, ()=>{
+    console.log('✨ backend executando ✨')
+})
