@@ -14,7 +14,23 @@ app.get('/project', (req, res)=>{
 })
 
 app.post('/project', (req, res)=>{
-    
+    res.json([
+        'projeto1',
+        'projeto2',
+        'projeto3',
+    ])
+})
+
+app.put('/project/:id', (req, res)=>{
+    res.json({
+        info: "update"
+    })
+})
+
+app.delete('/project/:id', (req, res)=>{
+    res.json({
+        info: "delete"
+    })
 })
 
 app.listen(3333, ()=>{
