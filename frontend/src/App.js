@@ -3,12 +3,12 @@ import { render } from 'react-dom'
 
 import Header from './components/Header'
 
-function App(){
+export default function App(){
     return (
         <>
-            <Header/>
+            <Header title="home"/>
+            <Header title="projects"/>
         </>
     )
 }
 
-export default App;
