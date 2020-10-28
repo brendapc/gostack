@@ -23,7 +23,7 @@ export default function App(){
 
             <button type="button" onClick={ handleAddProject } >Adicionar Projeto</button>
             <div>
-                <img src={ image } alt=""/>
+                <img width={600} src={ image } alt=""/>
             </div>
             
         </>
