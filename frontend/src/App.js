@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from 'react-dom'
 
 import Header from './components/Header'
 
 export default function App(){
-    const projects = ['Desenvolvimento Web', 'Desenvolvimento Mobile', 'Front-end', 'Back-end']
+    const [ projects, setProjects ] = useState(['Desenvolvimento Web', 'Desenvolvimento Mobile', 'Front-end', 'Back-end'])
+    
+    function handleAddProject(){
+        setProjects([...projects, `novo projeto ${Date.now()}`])
+        console.log(projects)
+    }
 
     return (
         <>
@@ -13,6 +18,8 @@ export default function App(){
             <ul>
             {projects.map(project => <li key={project}> {project} </li>)}
             </ul>
+
+            <button type="button" onClick={ handleAddProject } >Adicionar Projeto</button>
         </>
     )
 }
