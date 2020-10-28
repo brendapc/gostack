@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { render } from 'react-dom'
 
 import './App.css'
-
+import image from '../assets/image.jpg'
 import Header from './components/Header'
 
 export default function App(){
@@ -22,6 +22,10 @@ export default function App(){
             </ul>
 
             <button type="button" onClick={ handleAddProject } >Adicionar Projeto</button>
+            <div>
+                <img src={ image } alt=""/>
+            </div>
+            
         </>
     )
 }
