@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import api from './services/api'
 import './App.css'
 import image from '../assets/image.jpg'
 import Header from './components/Header'
 
 export default function App(){
-    const [ projects, setProjects ] = useState(['Desenvolvimento Web', 'Desenvolvimento Mobile', 'Front-end', 'Back-end'])
+    const [ projects, setProjects ] = useState([])
     
-    function handleAddProject(){
-        setProjects([...projects, `novo projeto ${Date.now()}`])
-        console.log(projects)
-    }
+    useEffect(()=>{
+        api.get('project').then( response =>{
+            setProjects(response.data)
+        })
+    }, [])
 
     return (
         <>
             <Header title="projects"/>
 
             <ul>
-            {projects.map(project => <li key={project}> {project} </li>)}
+            {projects.map(project => <li key={project.id}> {project.title} </li>)}
             </ul>
 
-            <button type="button" onClick={ handleAddProject } >Adicionar Projeto</button>
+            <button type="button">adicionar Projeto</button>
             <div>
                 <img width={600} src={ image } alt=""/>
             </div>
