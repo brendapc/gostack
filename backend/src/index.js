@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.json({msg: 'hello world'})
 })
 
-app.get('/project', validateId  ,(req, res)=>{
+app.get('/project', (req, res)=>{
     const { title } = req.query;
     const result = title 
         ? projects.filter(project => project.title.includes(title)) 
