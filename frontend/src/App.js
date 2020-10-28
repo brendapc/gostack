@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
 
+import './App.css'
+
 import Header from './components/Header'
 
 export default function App(){
