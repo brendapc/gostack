@@ -6,7 +6,13 @@ import Header from './components/Header'
 export default function App(){
     return (
         <>
-            <Header title="home"/>
+            <Header title="home">
+                <ul>
+                    <li>about us</li>
+                    <li>contact</li>
+                    <li>help</li>
+                </ul>
+            </Header>
             <Header title="projects"/>
         </>
     )
