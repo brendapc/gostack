@@ -13,6 +13,15 @@ export default function App(){
         })
     }, [])
 
+    async function handleAddProject(){
+        const response = await api.post('project', {
+            title: prompt("digite o nome"),
+            owner: prompt("nome dono")
+         })
+        console.log(response.data)
+
+        setProjects([...projects, response.data])
+    }
     return (
         <>
             <Header title="projects"/>
@@ -21,7 +30,7 @@ export default function App(){
             {projects.map(project => <li key={project.id}> {project.title} </li>)}
             </ul>
 
-            <button type="button">adicionar Projeto</button>
+            <button type="button" onClick={ handleAddProject }>adicionar Projeto</button>
             <div>
                 <img width={600} src={ image } alt=""/>
             </div>
