@@ -22,6 +22,10 @@ export default function App(){
 
         setProjects([...projects, response.data])
     }
+
+    async function handleClearProjects(){
+        setProjects([])
+    }
     return (
         <>
             <Header title="projects"/>
@@ -31,6 +35,7 @@ export default function App(){
             </ul>
 
             <button type="button" onClick={ handleAddProject }>adicionar Projeto</button>
+            <button type="button" onClick={ handleClearProjects }> Clear </button>
             <div>
                 <img width={600} src={ image } alt=""/>
             </div>
