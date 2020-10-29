@@ -12,7 +12,6 @@ function logRequests (req, res, next){
     const { method, url }	= req
     const logLabel = `o metodo é ${method} e a url é ${url}`
 
-    console.log(logLabel)
     next()
 }
 
