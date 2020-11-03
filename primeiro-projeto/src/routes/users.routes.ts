@@ -30,6 +30,7 @@ usersRouter.post('/', async (req, res)=> {
 })
 
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async (req, res)=>{
+	console.log(req.file)
 	return res.json({ok: true})
 })
 export default usersRouter
