@@ -39,7 +39,9 @@
             }
         ],
         "no-use-before-define": "off",
-        "@typescript-eslint/no-use-before-define": ["error"]
+		"@typescript-eslint/no-use-before-define": ["error"],
+		"indent": ["error", 2, { "ignoredNodes": ["JSXElement", "JSXElement > *", "JSXAttribute", "JSXIdentifier", "JSXNamespacedName", "JSXMemberExpression", "JSXSpreadAttribute", "JSXExpressionContainer", "JSXOpeningElement", "JSXClosingElement", "JSXText", "JSXEmptyExpression", "JSXSpreadChild"] }],
+    	"react/jsx-indent": ["warn", 2]
     },
     "settings": {
         "import/resolver": {
