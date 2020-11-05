@@ -1,15 +1,42 @@
-import React from 'react'
+import React, { FormEvent, useState } from 'react'
 import { FiChevronRight } from 'react-icons/fi'
 import logoImg from '../../assets/logo.svg'
 import { Title, Form, Repositories } from './styles'
+import api from '../../services/api'
+
+interface Repository {
+  full_name: string;
+  description: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  }
+}
 
 const Dashboard: React.FC = () => {
+  const [ newRepo, setNewRepo ] = useState('')
+  const [repositories, setRepositories ] = useState<Repository[]>([])
+
+  async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
+    event.preventDefault()
+
+    const response = await api.get(`repos/${newRepo}`)
+
+    const repository = response.data;
+    setRepositories([...repositories, repository])
+    console.log(repositories)
+  }
+
   return (
     <>
       <img src={logoImg} alt="logo github" />
       <Title>Explore os repositórios do Github</Title>
-      <Form>
-          <input placeholder="digite um nome" />
+      <Form onSubmit={handleAddRepository}>
+          <input
+            value={newRepo}
+            onChange={(e)=> setNewRepo(e.target.value)}
+            placeholder="digite o nome de um repositorio"
+          />
           <button type="submit">go</button>
       </Form>
 
