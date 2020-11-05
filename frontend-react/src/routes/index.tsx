@@ -7,7 +7,7 @@ import Repository from '../pages/Repository'
 const Routes:React.FC = () => ( // retorna sem a palavra "return" quando está retornando só UMA coisa
     <Switch>
         <Route path="/" exact component={Dashboard} />
-        <Route path="/repository" component={Repository} />
+        <Route path="/repositories/:repository+" component={Repository} />
     </Switch>
 )
 
