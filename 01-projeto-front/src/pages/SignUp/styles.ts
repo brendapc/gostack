@@ -1,6 +1,6 @@
 import  styled  from 'styled-components'
 import { shade } from 'polished'
-import signInBackground from '../../assets/background-image.png'
+import signUpBackground from '../../assets/image.png'
 
 export const Container = styled.div`
     height: 100vh;
@@ -9,13 +9,14 @@ export const Container = styled.div`
     justify-content: center;
 `
 export const Content = styled.div`
-     display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;    
     
     width: 100%;
     max-width: 700px;
+   
     form{
         margin: 80px 0;
         width: 340px;
@@ -39,7 +40,7 @@ export const Content = styled.div`
     }
 
     > a { /* a's diretamente dentro do content */
-         color: #ff9000;
+         color: #f4ede8;
          display: block;
          margin-top: 24px;
          text-decoration: none;
@@ -59,6 +60,6 @@ export const Content = styled.div`
 `
 export const Background = styled.div`
     flex: 1;
-    background: url(${signInBackground}) no-repeat center;
+    background: url(${signUpBackground}) no-repeat center;
     background-size: cover;
 `
