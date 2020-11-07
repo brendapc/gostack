@@ -12,13 +12,14 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
+    align-items: center; 
+    margin: 20px;   
     
     width: 100%;
     max-width: 700px;
    
     form{
-        margin: 80px 0;
+        margin: 50px 0;
         width: 340px;
         text-align: center;
 
