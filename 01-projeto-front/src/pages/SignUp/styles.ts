@@ -2,6 +2,7 @@ import  styled  from 'styled-components'
 import { shade } from 'polished'
 import signUpBackground from '../../assets/image.png'
 
+
 export const Container = styled.div`
     height: 100vh;
     display: flex;
