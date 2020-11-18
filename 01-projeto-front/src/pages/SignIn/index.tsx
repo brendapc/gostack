@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core' 
@@ -62,7 +63,7 @@ const SignIn: React.FC = () => {
             <Content>
                 <img src={logoImg} alt="logo go barber" />
                 <Form ref={formRef} onSubmit={ handleSubmit }>
-                    <h1>Faça seu logon</h1>
+                    <h1>Faça seu login</h1>
                     <Input name="email" icon={FiMail} placeholder="E-mail" />
                     <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
                     <Button type="submit">Entrar</Button>
@@ -70,10 +71,10 @@ const SignIn: React.FC = () => {
                     <a href="/"> Esqueci minha senha</a>
                     
                 </Form>
-                <a href="/">
+                <Link to="/signup">
                     <FiLogIn />
                     Criar conta
-                </a>
+                </Link>
             </Content>
             <Background />
         </Container>
