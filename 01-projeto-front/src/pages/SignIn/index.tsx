@@ -13,7 +13,7 @@ import Button from '../../components/Button'
 import { useAuth } from '../../hooks/AuthContext'
 import { useToast } from '../../hooks/ToastContext'
 
-import { Container, Content, Background } from './styles'
+import { Container, Content, Background, AnimationContainer } from './styles'
 
 interface SignInForData {
     email: string;
@@ -61,20 +61,24 @@ const SignIn: React.FC = () => {
 
         <Container>
             <Content>
-                <img src={logoImg} alt="logo go barber" />
-                <Form ref={formRef} onSubmit={ handleSubmit }>
-                    <h1>Faça seu login</h1>
-                    <Input name="email" icon={FiMail} placeholder="E-mail" />
-                    <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-                    <Button type="submit">Entrar</Button>
+                <AnimationContainer>
 
-                    <a href="/"> Esqueci minha senha</a>
-                    
-                </Form>
-                <Link to="/signup">
-                    <FiLogIn />
-                    Criar conta
-                </Link>
+                
+                    <img src={logoImg} alt="logo go barber" />
+                    <Form ref={formRef} onSubmit={ handleSubmit }>
+                        <h1>Faça seu login</h1>
+                        <Input name="email" icon={FiMail} placeholder="E-mail" />
+                        <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
+                        <Button type="submit">Entrar</Button>
+
+                        <a href="/"> Esqueci minha senha</a>
+                        
+                    </Form>
+                    <Link to="/signup">
+                        <FiLogIn />
+                        Criar conta
+                    </Link>
+                </AnimationContainer>
             </Content>
             <Background />
         </Container>
