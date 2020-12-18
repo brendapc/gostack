@@ -4,8 +4,8 @@ import cors from 'cors'
 import 'reflect-metadata'
 import routes from './routes';
 import '../typeorm'
-import uploadConfig from '../../../config/upload'
-import AppError from '../../errors/AppError'
+import uploadConfig from '@config/upload'
+import AppError from '@shared/errors/AppError'
 const app = express();
 
 app.use(express.json())
