@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import AuthenticateUserService from '../services/AuthenticateUserService'
+import AuthenticateUserService from '../../../../modules/users/services/AuthenticateUserService'
 
-import Authenticate from '../services/AuthenticateUserService'
+import Authenticate from '../../../../modules/users/services/AuthenticateUserService'
 const sessionsRouter = Router()
 
 sessionsRouter.post('/', async (req, res)=> {

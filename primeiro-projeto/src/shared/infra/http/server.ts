@@ -3,9 +3,9 @@ import 'express-async-errors'
 import cors from 'cors'
 import 'reflect-metadata'
 import routes from './routes';
-import './database'
-import uploadConfig from './config/upload'
-import AppError from './errors/AppError'
+import '../typeorm'
+import uploadConfig from '../../../config/upload'
+import AppError from '../../errors/AppError'
 const app = express();
 
 app.use(express.json())
