@@ -1,42 +1,45 @@
-import path from 'path'
-import fs from 'fs'
+import path from 'path';
+import fs from 'fs';
+import { inject, injectable } from 'tsyringe';
+import User from '../infra/typeorm/entities/User';
+import uploadConfig from '../../../config/upload';
+import AppError from '../../../shared/errors/AppError';
+import iUsersRepository from '../repositories/iUsersRepository';
 
-import User from '../infra/typeorm/entities/User'
-import uploadConfig from '../../../config/upload'
-import AppError from '../../../shared/errors/AppError'
-import iUsersRepository from '../repositories/iUsersRepository'
-
-interface IRequest{
-	user_id: string;
-	avatarFileName: string
+interface IRequest {
+  user_id: string;
+  avatarFileName: string;
 }
 
+@injectable()
 class UpdateUserAvatarService {
-	constructor (private usersRepository: iUsersRepository){ }
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: iUsersRepository
+  ) {}
 
-	public async execute({ user_id, avatarFileName}: IRequest): Promise<User>{
+  public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
 
-		const user = await this.usersRepository.findById(user_id)
+    if (!user) {
+      throw new AppError('Only authenticated users can change avatar', 401);
+    }
 
-		if(!user){
-			throw new AppError('Only authenticated users can change avatar', 401)
-		}
+    if (user.avatar) {
+      //se ja tem avatar deletar avatar anterior
+      const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
+      const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
 
-		if(user.avatar){
-			//se ja tem avatar deletar avatar anterior
-			const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar)
-			const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath)
+      if (userAvatarFileExists) {
+        await fs.promises.unlink(userAvatarFilePath);
+      }
+    }
 
-			if(userAvatarFileExists){
-				await fs.promises.unlink(userAvatarFilePath)
-			}
-		}
+    user.avatar = avatarFileName;
+    await this.usersRepository.save(user);
 
-		user.avatar = avatarFileName
-		await this.usersRepository.save(user)
-
-		return user
-	}
+    return user;
+  }
 }
 
-export default UpdateUserAvatarService
+export default UpdateUserAvatarService;

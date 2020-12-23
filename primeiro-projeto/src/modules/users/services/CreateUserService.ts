@@ -2,15 +2,18 @@ import { hash } from 'bcryptjs'
 import User from "../infra/typeorm/entities/User";
 import AppError from '../../../shared/errors/AppError'
 import iUsersRepository from "../repositories/iUsersRepository";
-
+import { inject, injectable } from 'tsyringe'
 interface IRequest {
 	name: string,
 	email: string,
 	password: string
 }
 
+@injectable()
 class CreateUserService {
-	constructor(private usersRepository: iUsersRepository){ }
+	constructor(
+		@inject('UsersRepository')
+		private usersRepository: iUsersRepository){ }
 
 	public async execute({ name, email, password }: IRequest): Promise<User> {
 
