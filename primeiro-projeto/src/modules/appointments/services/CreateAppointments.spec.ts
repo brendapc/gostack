@@ -1,11 +1,23 @@
-import CreateAppointmentService from './CreateAppointmentService'
+import CreateAppointmentService from './CreateAppointmentService';
+import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 
 describe('CreateAppointment', () => {
-    it('should be able to create a new appointment', ()=>{
-        expect(1+2).toBe(3)
-    })
+  it('should be able to create a new appointment', async () => {
+    const fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    const createAppointment = new CreateAppointmentService(
+      fakeAppointmentsRepository
+    );
 
-    it('should not be able to create two appointments at the same time', ()=>{
-        expect(1+2).toBe(3)
-    })
-})
+    const appointment = await createAppointment.execute({
+      date: new Date(),
+      provider_id: '123456',
+    });
+
+    expect(appointment).toHaveProperty('id')
+    expect(appointment.provider_id).toBe('123456')
+  });
+
+  it('should not be able to create two appointments at the same time', () => {
+    expect(1 + 2).toBe(3);
+  });
+});
