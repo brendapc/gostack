@@ -1,4 +1,3 @@
-import Appointment from "../../../infra/typeorm/entities/Appointment";
 import { getRepository, Repository } from 'typeorm'
 import IUsersRepository from '@modules/users/repositories/iUsersRepository'
 import ICreateUserDTO from '@modules/users/dtos/iCreateUserDTO'

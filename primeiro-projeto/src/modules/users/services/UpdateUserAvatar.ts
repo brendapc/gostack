@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import "reflect-metadata"
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import uploadConfig from '../../../config/upload';
